@@ -93,12 +93,12 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
         
         var deleteCategoriesCmd = connection.CreateCommand();
         deleteCategoriesCmd.CommandText = "delete from categories where entryId = @id;";
-        deleteCategoriesCmd.Parameters.AddWithValue("@id", id);
+        deleteCategoriesCmd.Parameters.AddWithValue("@id", id.ToString());
         await deleteCategoriesCmd.ExecuteNonQueryAsync();
 
         var deleteEntryCmd = connection.CreateCommand();
         deleteEntryCmd.CommandText = "delete from wallet_entries where id = @id;";
-        deleteEntryCmd.Parameters.AddWithValue("@id", id);
+        deleteEntryCmd.Parameters.AddWithValue("@id", id.ToString());
         var affected = await deleteEntryCmd.ExecuteNonQueryAsync();
 
         transaction.Commit();
