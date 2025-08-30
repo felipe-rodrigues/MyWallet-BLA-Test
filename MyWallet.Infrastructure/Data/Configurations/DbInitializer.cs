@@ -82,18 +82,17 @@ public class DbInitializer
         cmdCheckUsers.CommandText = "select count(*) from users;";
         var usersCount = Convert.ToInt32(await cmdCheckUsers.ExecuteScalarAsync());
 
-        if (usersCount == 0)
-        {
-            var insertUserCmd = connection.CreateCommand();
-            insertUserCmd.CommandText = """
-                                        insert into users (id, name, email, hash) values
-                                        (@id1, 'Admin', 'admin@wallet.com', '10000.DeUME4tt9e5AXzRpHvSW2A==.gt719OMI3P1qb+xXGDQV5kxZNYwIMewyXVgYUznxdn0='),
-                                        (@id2, 'Test User', 'test@wallet.com', '10000.L/28ZfMv3TCRL8jy/RzvOQ==.8yKOAjbM5zI37rSTAHfk78xZ9GjH/dkk21GXdziTXW8=');
-                                        """;
-            insertUserCmd.Parameters.AddWithValue("@id1", Guid.NewGuid().ToString());
-            insertUserCmd.Parameters.AddWithValue("@id2", Guid.NewGuid().ToString());
-            await insertUserCmd.ExecuteNonQueryAsync();
-        }
+      
+        var insertUserCmd = connection.CreateCommand();
+        insertUserCmd.CommandText = """
+                                    insert into users (id, name, email, hash) values
+                                    (@id1, 'Admin', 'admin@wallet.com', '10000.DeUME4tt9e5AXzRpHvSW2A==.gt719OMI3P1qb+xXGDQV5kxZNYwIMewyXVgYUznxdn0='),
+                                    (@id2, 'Test User', 'test@wallet.com', '10000.L/28ZfMv3TCRL8jy/RzvOQ==.8yKOAjbM5zI37rSTAHfk78xZ9GjH/dkk21GXdziTXW8=');
+                                    """;
+        insertUserCmd.Parameters.AddWithValue("@id1", Guid.NewGuid().ToString());
+        insertUserCmd.Parameters.AddWithValue("@id2", Guid.NewGuid().ToString());
+        await insertUserCmd.ExecuteNonQueryAsync();
+        
     }
     
     private async Task SeedWalletEntriesTable()

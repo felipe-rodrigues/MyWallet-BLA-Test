@@ -23,7 +23,10 @@
       </span>
     </td>
     <td>{{ entry.categories?.join(',') }}</td>
-    <td><button type="button" class="btn btn-danger" >Remove</button></td>
+    <td>
+      <button type="button" class="btn btn-warning me-2" (click)="edit(entry.id)">Edit</button>
+      <button type="button" class="btn btn-danger" (click)="remove(entry.id)">Remove</button>
+    </td>
   </tr>
   </tbody>
 </table>

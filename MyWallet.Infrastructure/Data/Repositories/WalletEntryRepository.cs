@@ -21,7 +21,7 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
                               insert into wallet_entries (id, description, value, date) 
                                   values (@id, @description, @value, @date);
                               """;
-        command.Parameters.AddWithValue("@id", entity.Id);
+        command.Parameters.AddWithValue("@id", entity.Id.ToString());
         command.Parameters.AddWithValue("@description", entity.Description);
         command.Parameters.AddWithValue("@value", entity.Value);
         command.Parameters.AddWithValue("@date", entity.Date);
@@ -36,7 +36,7 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
                 categoriesCommand.CommandText = """
                                                 insert into categories (entryId, name) values (@id, @name);
                                                 """;
-                categoriesCommand.Parameters.AddWithValue("@id", entity.Id);
+                categoriesCommand.Parameters.AddWithValue("@id", entity.Id.ToString());
                 categoriesCommand.Parameters.AddWithValue("@name", entityCategory);
                 await categoriesCommand.ExecuteNonQueryAsync();
             }
@@ -58,7 +58,7 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
             set description = @description, value = @value, date = @date
             where id = @id;
         """;
-        updateCommand.Parameters.AddWithValue("@id", entity.Id);
+        updateCommand.Parameters.AddWithValue("@id", entity.Id.ToString());
         updateCommand.Parameters.AddWithValue("@description", entity.Description);
         updateCommand.Parameters.AddWithValue("@value", entity.Value);
         updateCommand.Parameters.AddWithValue("@date", entity.Date);
@@ -69,14 +69,14 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
         {
             var deleteCategoriesCommand = connection.CreateCommand();
             deleteCategoriesCommand.CommandText = "delete from categories where entryId = @id;";
-            deleteCategoriesCommand.Parameters.AddWithValue("@id", entity.Id);
+            deleteCategoriesCommand.Parameters.AddWithValue("@id", entity.Id.ToString());
             await deleteCategoriesCommand.ExecuteNonQueryAsync();
         
             foreach (var category in entity.Categories)
             {
                 var insertCategoryCommand = connection.CreateCommand();
                 insertCategoryCommand.CommandText = "insert into categories (entryId, name) values (@id, @name);";
-                insertCategoryCommand.Parameters.AddWithValue("@id", entity.Id);
+                insertCategoryCommand.Parameters.AddWithValue("@id", entity.Id.ToString());
                 insertCategoryCommand.Parameters.AddWithValue("@name", category);
                 await insertCategoryCommand.ExecuteNonQueryAsync();
             }
@@ -113,10 +113,10 @@ public class WalletEntryRepository : BaseRepository<WalletEntry>, IWalletEntryRe
         command.CommandText = """
                               select we.id, we.description, we.value, we.date, GROUP_CONCAT(c.name, ',') as categories
                               from wallet_entries we LEFT JOIN categories c on we.id = c.entryId
-                              where we.id = @id
+                              where we.id = @id COLLATE NOCASE
                               group by we.id, we.description, we.value, we.date
                               """;
-        command.Parameters.AddWithValue("@id", id);
+        command.Parameters.AddWithValue("@id", id.ToString());
 
         await using var reader = await command.ExecuteReaderAsync();
 

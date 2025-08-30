@@ -1,0 +1,58 @@
+<div class="container mt-4">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="alert alert-dismissible fade show" role="alert" *ngFor="let alert of alerts" [ngClass]="'alert-' + alert.type">
+				<strong [innerHTML]="alert.message"></strong>
+				<button type="button" class="close" data-dismiss="alert" (click)="close(alert)" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+  <br>
+  <h1>Add Wallet Entry</h1>
+  <br>
+
+	<form [formGroup]="walletEntryForm" (ngSubmit)="onSubmit()">
+			<div class="mb-3">
+				<label for="description" class="form-label">Description</label>
+				<input id="description" formControlName="description" type="text" class="form-control" [ngClass]="{'is-invalid': (f.description.touched || submitted) && f.description.invalid}" />
+				<div *ngIf="(f.description.touched || submitted) && f.description.invalid" class="invalid-feedback d-block">
+					<div *ngIf="f.description.errors?.required">Description is required.</div>
+					<div *ngIf="f.description.errors?.minlength">Minimum 3 characters.</div>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="value" class="form-label">Value</label>
+				<input id="value" formControlName="value" type="number" step="0.01" class="form-control" [ngClass]="{'is-invalid': (f.value.touched || submitted) && f.value.invalid}" />
+						<div *ngIf="(f.value.touched || submitted) && f.value.invalid" class="invalid-feedback d-block">
+							<div *ngIf="f.value.errors?.required">Value is required.</div>
+							<div *ngIf="f.value.errors?.notZero">Value cannot be zero.</div>
+						</div>
+			</div>
+
+			<div class="mb-3">
+				<label for="date" class="form-label">Date</label>
+				<input id="date" formControlName="date" type="date" class="form-control" [ngClass]="{'is-invalid': (f.date.touched || submitted) && f.date.invalid}" />
+				<div *ngIf="(f.date.touched || submitted) && f.date.invalid" class="invalid-feedback d-block">
+					<div *ngIf="f.date.errors?.required">Date is required.</div>
+				</div>
+			</div>
+
+			<div formArrayName="categories" class="mb-3">
+				<label class="form-label">Categories</label>
+				<div *ngFor="let cat of categories.controls; let i = index" class="input-group mb-2">
+					<input [formControlName]="i" type="text" class="form-control" [ngClass]="{'is-invalid': (cat.touched || submitted) && cat.invalid}" />
+					<button type="button" class="btn btn-outline-danger" (click)="removeCategory(i)" [disabled]="categories.length === 1">Remove</button>
+					<div *ngIf="(cat.touched || submitted) && cat.invalid" class="invalid-feedback d-block">
+						<div *ngIf="cat.errors?.required">Category is required.</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-outline-primary" (click)="addCategory()">Add Category</button>
+			</div>
+
+		<button type="submit" class="btn btn-success" [disabled]="walletEntryForm.invalid">Save</button>
+</form>
+</div>
