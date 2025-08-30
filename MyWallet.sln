@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWallet.Contracts", "MyWal
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWallet.Domain", "MyWallet.Domain\MyWallet.Domain.csproj", "{057FE3B5-A8AE-4776-8F5D-6EA3E00F5646}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWalltet.Infrastructure", "MyWalltet.Infrastructure\MyWalltet.Infrastructure.csproj", "{C63D3C72-D5E3-4F04-869A-B8215D7DBC6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWallet.Infrastructure", "MyWallet.Infrastructure\MyWallet.Infrastructure.csproj", "{C63D3C72-D5E3-4F04-869A-B8215D7DBC6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C4AA9F05-102A-43E3-9077-D5FE41E42908}"
 EndProject

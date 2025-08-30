@@ -11,6 +11,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.20" />
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="7.0.19"/>
     </ItemGroup>
 
@@ -19,6 +20,13 @@
         <Content Remove="$(SpaRoot)**"/>
         <None Remove="$(SpaRoot)**"/>
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MyWallet.Application\MyWallet.Application.csproj" />
+      <ProjectReference Include="..\MyWallet.Contracts\MyWallet.Contracts.csproj" />
+      <ProjectReference Include="..\MyWallet.Domain\MyWallet.Domain.csproj" />
+      <ProjectReference Include="..\MyWallet.Infrastructure\MyWallet.Infrastructure.csproj" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
