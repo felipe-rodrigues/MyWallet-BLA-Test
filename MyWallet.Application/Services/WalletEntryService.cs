@@ -26,10 +26,10 @@ public class WalletEntryService : IWalletEntryService
         return await _walletEntryRepository.AddAsync(walletEntry);
     } 
 
-    public async Task<WalletEntry> UpdateAsync(WalletEntry walletEntry)
+    public async Task<WalletEntry?> UpdateAsync(WalletEntry walletEntry)
     {
         var result = await _walletEntryRepository.UpdateAsync(walletEntry);
-        return walletEntry;
+        return !result ? null : walletEntry;
     }
 
     public async Task<bool> DeleteAsync(Guid id)

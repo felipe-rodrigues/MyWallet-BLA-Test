@@ -30,6 +30,12 @@ public class WalletEntryController : ControllerBase
     public async Task<IActionResult> GetById(Guid id)
     {
         var walletEntry = await _walletEntryService.GetByIdAsync(id);
+        
+        if (walletEntry is null)
+        {
+            return NotFound();
+        }
+        
         return Ok(walletEntry?.MapToResponse());
     }
     
@@ -44,7 +50,7 @@ public class WalletEntryController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         var result = await _walletEntryService.DeleteAsync(id);
-        return Ok(result);
+        return result ? Ok() : NotFound();
     }
 
     [HttpPut("{id:guid}")]
@@ -52,6 +58,10 @@ public class WalletEntryController : ControllerBase
     {
         var walletEntry = request.MapToWalletEntry(id);
         var result = await _walletEntryService.UpdateAsync(walletEntry);
+        
+        if(result is null)
+            return NotFound();
+        
         return Ok(result.MapToResponse());
     }
 }
