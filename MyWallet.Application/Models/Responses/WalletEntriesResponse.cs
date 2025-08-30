@@ -1,4 +1,4 @@
-﻿namespace MyWallet.Contracts.Responses;
+﻿namespace MyWallet.Application.Models.Responses;
 
 public class WalletEntriesResponse
 {

@@ -1,4 +1,6 @@
-﻿namespace MyWallet.Infrastructure.Data.Configurations;
+﻿using Microsoft.Data.Sqlite;
+
+namespace MyWallet.Infrastructure.Data.Configurations;
 
 public class DbInitializer
 {
@@ -11,8 +13,14 @@ public class DbInitializer
     
     public async Task InitializeAsync()
     {
-        using var connection = await _connectionFactory.CreateConnectionAsync();
+        await CreateWalletEntriesTable();
+        await CreateCategoriesTable();
+        await CreateUsersTable();
+    }
 
+    private async Task CreateWalletEntriesTable()
+    {
+        using var connection  = await _connectionFactory.CreateConnectionAsync();
         var command = connection.CreateCommand();
         command.CommandText =
             """
@@ -23,10 +31,14 @@ public class DbInitializer
                 date text not null 
             )
             """;
-        
+    
         await command.ExecuteNonQueryAsync();
-        
-        command = connection.CreateCommand();
+    }
+
+    private async Task CreateCategoriesTable()
+    {
+        using var connection = await _connectionFactory.CreateConnectionAsync();
+        var command = connection.CreateCommand();
         command.CommandText =
             """
             create table if not exists categories (
@@ -38,6 +50,22 @@ public class DbInitializer
             """;
 
         await command.ExecuteNonQueryAsync();
+    }
 
+    private async Task CreateUsersTable()
+    {
+        using var connection = await _connectionFactory.CreateConnectionAsync();
+        var command = connection.CreateCommand();
+        command.CommandText =
+            """
+            create table if not exists users (
+                id text primary key, 
+                name text not null, 
+                email text not null, 
+                hash text not null
+            )
+            """;
+
+        await command.ExecuteNonQueryAsync();
     }
 }

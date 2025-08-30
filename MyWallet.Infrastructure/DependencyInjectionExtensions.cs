@@ -10,7 +10,8 @@ public static class DependencyInjectionExtensions
     public static IServiceCollection AddInfrastructure(this IServiceCollection services,string connectionString)
     {
         return services.AddDatabase(connectionString)
-            .AddSingleton<IWalletEntryRepository, WalletEntryRepository>();
+            .AddSingleton<IWalletEntryRepository, WalletEntryRepository>()
+            .AddSingleton<IUserRepository, UserRepository>();
     }
 
     public static IServiceCollection AddDatabase(this IServiceCollection services, string connectionString)

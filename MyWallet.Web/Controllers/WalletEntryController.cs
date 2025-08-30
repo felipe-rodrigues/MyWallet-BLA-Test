@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MyWallet.Application.Models.Requests;
 using MyWallet.Application.Services;
-using MyWallet.Contracts.Requests;
+using MyWallet.Domain.Interfaces.Services;
 using MyWallet.Web.Mapping;
 
 namespace MyWallet.Web.Controllers;

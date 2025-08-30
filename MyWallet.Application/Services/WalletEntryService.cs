@@ -2,6 +2,7 @@
 using MyWallet.Application.Validators.WalletEntry;
 using MyWallet.Domain.Entities;
 using MyWallet.Domain.Interfaces.Repositories;
+using MyWallet.Domain.Interfaces.Services;
 
 namespace MyWallet.Application.Services;
 

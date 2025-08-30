@@ -19,7 +19,8 @@
         class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
         [ngClass]="{ show: isExpanded }"
       >
-        <ul class="navbar-nav flex-grow">
+
+        <ul class="navbar-nav flex-grow" *ngIf="!(currentUser | async) else logged">
           <li
             class="nav-item"
             [routerLinkActive]="['link-active']"
@@ -28,16 +29,31 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
+            <a class="nav-link text-dark" [routerLink]="['/login']"
+            >Login</a
             >
           </li>
         </ul>
+        <ng-template #logged>
+          <ul class="navbar-nav flex-grow">
+            <li
+              class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            </li>
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <a class="nav-link text-dark" [routerLink]="['/wallet-entry']"
+              >WalletList</a
+              >
+            </li>
+
+            <li class="nav-item" [routerLinkActive]="['link-active']">
+              <button type="button" class="nav-link text-dark btn" (click)="logout()">Logout</button>
+            </li>
+          </ul>
+        </ng-template>
       </div>
     </div>
   </nav>

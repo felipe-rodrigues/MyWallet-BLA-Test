@@ -1,0 +1,9 @@
+.positive-value {
+  color: green;
+  font-weight: bold; /* Opcional: para dar mais destaque */
+}
+
+.negative-value {
+  color: red;
+  font-weight: bold; /* Opcional: para dar mais destaque */
+}

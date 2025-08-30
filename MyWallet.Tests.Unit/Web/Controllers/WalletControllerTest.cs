@@ -1,10 +1,11 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using MyWallet.Application.Models.Requests;
+using MyWallet.Application.Models.Responses;
 using MyWallet.Application.Services;
-using MyWallet.Contracts.Requests;
-using MyWallet.Contracts.Responses;
 using MyWallet.Domain.Entities;
+using MyWallet.Domain.Interfaces.Services;
 using MyWallet.Web.Controllers;
 using MyWallet.Web.Mapping;
 

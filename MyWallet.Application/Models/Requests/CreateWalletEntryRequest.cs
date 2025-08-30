@@ -1,6 +1,6 @@
-﻿namespace MyWallet.Contracts.Requests;
+﻿namespace MyWallet.Application.Models.Requests;
 
-public class UpdateWalletEntryRequest
+public class CreateWalletEntryRequest
 {
     public required string Description { get; init; }
     public required decimal Value { get; init; }

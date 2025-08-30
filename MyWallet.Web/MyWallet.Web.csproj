@@ -24,7 +24,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\MyWallet.Application\MyWallet.Application.csproj" />
-      <ProjectReference Include="..\MyWallet.Contracts\MyWallet.Contracts.csproj" />
       <ProjectReference Include="..\MyWallet.Domain\MyWallet.Domain.csproj" />
       <ProjectReference Include="..\MyWallet.Infrastructure\MyWallet.Infrastructure.csproj" />
     </ItemGroup>

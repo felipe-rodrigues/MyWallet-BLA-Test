@@ -35,7 +35,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddApplication();
-builder.Services.AddInfrastructure("Data Source=Wallet.db;");
+builder.Services.AddInfrastructure("Data Source=../Wallet.db;");
 
 var app = builder.Build();
 
@@ -47,12 +47,11 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
-app.UseStaticFiles();
-app.UseRouting();
 
 app.UseMiddleware<ValidationMiddleware>();
 app.MapControllerRoute(

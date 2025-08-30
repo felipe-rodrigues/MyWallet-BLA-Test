@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWallet.Application.Common.Exceptions;
-using MyWallet.Contracts.Responses;
 
 namespace MyWallet.Web.Middlewares;
 

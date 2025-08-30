@@ -1,7 +1,8 @@
-﻿namespace MyWallet.Contracts.Requests;
+﻿namespace MyWallet.Application.Models.Responses;
 
-public class CreateWalletEntryRequest
+public class WalletEntryResponse
 {
+    public Guid Id { get; init; }
     public required string Description { get; init; }
     public required decimal Value { get; init; }
     public required DateTime Date { get; init; }

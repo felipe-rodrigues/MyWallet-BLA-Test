@@ -1,5 +1,5 @@
-﻿using MyWallet.Contracts.Requests;
-using MyWallet.Contracts.Responses;
+﻿using MyWallet.Application.Models.Requests;
+using MyWallet.Application.Models.Responses;
 using MyWallet.Domain.Entities;
 
 namespace MyWallet.Web.Mapping;

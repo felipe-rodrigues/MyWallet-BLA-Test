@@ -1,0 +1,29 @@
+
+<br>
+<h1>Entries  <button type="button" class="btn btn-primary" (click)="add()">Add</button></h1>
+<br>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="walletEntries">
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Value</th>
+    <th>Categories</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let entry of walletEntries">
+    <td>{{ entry.description }}</td>
+    <td>
+      <span [ngClass]="{'positive-value': entry.value > 0, 'negative-value': entry.value <= 0}">
+        <span *ngIf="entry.value > 0">💵 </span> <!-- Dinheiro verde para valor positivo -->
+        <span *ngIf="entry.value <= 0">💴 </span> <!-- Dinheiro amarelo para valor negativo/zero -->
+        {{ entry.value | currency }}
+      </span>
+    </td>
+    <td>{{ entry.categories?.join(',') }}</td>
+    <td><button type="button" class="btn btn-danger" >Remove</button></td>
+  </tr>
+  </tbody>
+</table>
